@@ -1,0 +1,13 @@
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Notice:  Undefined variable: _SESSION in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 3
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Notice:  Trying to access array offset on value of type null in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 3
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Notice:  Undefined variable: con in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 38
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 38
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 39
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Notice:  Trying to access array offset on value of type null in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 42
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Notice:  Trying to access array offset on value of type null in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 43
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Notice:  Trying to access array offset on value of type null in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 44
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Notice:  Trying to access array offset on value of type null in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 45
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Notice:  Trying to access array offset on value of type null in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 48
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Notice:  Trying to access array offset on value of type null in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 49
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Notice:  Trying to access array offset on value of type null in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 50
+[08-Aug-2022 13:30:37 America/Sao_Paulo] PHP Notice:  Trying to access array offset on value of type null in /home/emegygxj/public_html/desenvolvimento/br/app/config/seguranca.php on line 51

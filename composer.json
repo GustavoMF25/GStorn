@@ -1,0 +1,13 @@
+{
+    "name": "vendor/estoque-syntax-web",
+    "description": "Description of project Estoque - Syntax Web.",
+    "authors": [
+        {
+            "name": "gustavo.fernandes",
+            "email": "your@email.here"
+        }
+    ],
+    "require": {
+        "ramsey/uuid": "4.2.0"
+    }
+}

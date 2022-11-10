@@ -1,0 +1,8 @@
+[03-Aug-2022 20:59:57 America/Sao_Paulo] PHP Warning:  include(../vendor/autoload.php): failed to open stream: No such file or directory in /home/emegygxj/public_html/desenvolvimento/br/login/verLogin.php on line 3
+[03-Aug-2022 20:59:57 America/Sao_Paulo] PHP Warning:  include(../vendor/autoload.php): failed to open stream: No such file or directory in /home/emegygxj/public_html/desenvolvimento/br/login/verLogin.php on line 3
+[03-Aug-2022 20:59:57 America/Sao_Paulo] PHP Warning:  include(): Failed opening '../vendor/autoload.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/emegygxj/public_html/desenvolvimento/br/login/verLogin.php on line 3
+[03-Aug-2022 20:59:57 America/Sao_Paulo] PHP Warning:  include(../app/config/connMysql.php): failed to open stream: No such file or directory in /home/emegygxj/public_html/desenvolvimento/br/login/verLogin.php on line 4
+[03-Aug-2022 20:59:57 America/Sao_Paulo] PHP Warning:  include(../app/config/connMysql.php): failed to open stream: No such file or directory in /home/emegygxj/public_html/desenvolvimento/br/login/verLogin.php on line 4
+[03-Aug-2022 20:59:57 America/Sao_Paulo] PHP Warning:  include(): Failed opening '../app/config/connMysql.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/emegygxj/public_html/desenvolvimento/br/login/verLogin.php on line 4
+[03-Aug-2022 20:59:57 America/Sao_Paulo] PHP Notice:  Undefined index: email in /home/emegygxj/public_html/desenvolvimento/br/login/verLogin.php on line 26
+[03-Aug-2022 20:59:57 America/Sao_Paulo] PHP Notice:  Undefined index: senha in /home/emegygxj/public_html/desenvolvimento/br/login/verLogin.php on line 27
