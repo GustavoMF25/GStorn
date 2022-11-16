@@ -1,12 +1,12 @@
 
 <?php
 
-define("HOST", "15.235.9.101");
-define("USUARIO", "emegygxj_painel_central");
-define("SENHA", "syntaxweb@123qwe!!");
-define("SCHEMA", "emegygxj_painel_sintax");
+$HOST = "localhost";
+$USUARIO = "root";
+$SENHA = "";
+$SCHEMA = "gstorn";
 
-$con = mysqli_connect(HOST, USUARIO, SENHA, SCHEMA);
+$con = mysqli_connect($HOST, $USUARIO,$SENHA,$SCHEMA);
 
 $sql1 = "SET NAMES 'utf8'";
 mysqli_query($con, $sql1);

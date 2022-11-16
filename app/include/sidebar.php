@@ -1,10 +1,10 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
-        <img src="<?= BASE ?>/assets/images/lg2.png" alt="AdminLTE Logo" class="brand-image img-circle " style="">
+    <a href="<?=BASED?>" class="brand-link">
+        <img src="<?= BASE ?>/assets/images/logoGStor.png" class="brand-image img-circle " style="">
         <!--<i class="fa fa-cogs elevation-3 brand-image " aria-hidden="true"  style="opacity: .8"></i>-->
-        <span class="brand-text font-weight-light"> Estoque Syntax</span>
+        <span class="brand-text font-weight-light" style="font-family: 'Abril Fatface', cursive; font-size: 20px;"> GStorn</span>
     </a>
 
     <!-- Sidebar -->
@@ -17,7 +17,7 @@
               <!--<i class="fa fa-user-circle img-circle elevation-2" aria-hidden="true" style="color: #fafafa;"></i>-->
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?= isset($_SESSION['nomeusuario']) ? $_SESSION['nomeusuario'] : 'Sem usuário' ?></a>
+                <a href="#" class="d-block"><?= isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Sem usuário' ?></a>
             </div>
         </div>
 
@@ -40,23 +40,23 @@
                      with font-awesome or any other icon font library -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                        <i class="fa fa-list-alt" aria-hidden="true"></i>
                         <p>
-                            Ambiente
+                            Cadastro
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-users" aria-hidden="true"></i>
-                                <p>Usuarios</p>
+                            <a href="<?=BASED?>/cadastro/produtos/" class="nav-link">
+                                <i class="fa fa-cubes" aria-hidden="true"></i>
+                                <p>Produtos</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?=BASED?>/cadastro/categorias/" class="nav-link">
                                 <i class="fa fa-sitemap" aria-hidden="true"></i>
-                                <p>Permissionamento</p>
+                                <p>Categorias</p>
                             </a>
                         </li>
 

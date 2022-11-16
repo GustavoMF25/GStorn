@@ -117,8 +117,8 @@
                     </div>
                 </div>
                 <div class="drop-right text-center">
-                    <h4>Gustavo Fernandes</h4>
-                    <p class="user-name"> gustavo.fernandes@syntaxweb.com.br</p>
+                    <h4><?=$_SESSION['nome']?></h4>
+                    <p class="user-name"><?=$_SESSION['email']?></p>
                     <!--<i class="fa fa-thumbs-down" aria-hidden="true"></i>-->
                 </div>
                 <div class="m-t-10 p-3 drop-list">
@@ -127,7 +127,7 @@
                         <li><a href="#"><i class="icon-envelope-open"></i>Messages</a></li>
                         <li><a href="#"><i class="icon-settings"></i>Settings</a></li>-->
                         <li>
-                            <a href="#" class="dropdown-item">
+                            <a href="<?=BASED?>/sair.php" class="dropdown-item">
                                 <i class="fa fa-power-off" aria-hidden="true"></i>
                                 <!--<i class="fa fa-sign-out" aria-hidden="true"></i>-->
                                 Sair 

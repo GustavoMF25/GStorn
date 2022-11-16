@@ -73,7 +73,8 @@ if ($foto[0] <> "") {
 mysqli_close($con);
 //if ($qtdAcesso[0] == 1) {
 //    header("Location: ./primeiroAcesso/");
-header("Location: ./dashboard/");
+// header("Location: ./dashboard/");
+header("Location: ./");
 //} else {
 //    header("Location: ./index");
 //}
