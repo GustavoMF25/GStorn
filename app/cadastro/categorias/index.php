@@ -1,10 +1,11 @@
 <?php
 include '../../config/config.php';
+include '../../config/conn.php';
 
 $tabs = isset($_GET['tabs']) ? $_GET['tabs'] : 'gerenciar';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
@@ -19,26 +20,36 @@ $tabs = isset($_GET['tabs']) ? $_GET['tabs'] : 'gerenciar';
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= BASE ?>/assets/css/adminlte.min.css">
     <link rel="stylesheet" href="<?= BASED ?>/assets/css/main.css">
+
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // $('.select2').select2();
 
             mudaTabs('<?= $tabs ?>')
+            $("#table-categoria").DataTable({
+                
+                "responsive": true, 
+                "searching": false,
+            })
         })
 
 
         function mudaTabs(atual = null) {
             console.log(atual)
             if (atual == 'cadastrar') {
-                // $("#cadastrar").show()
-                // $("#gerenciar").hide()
+
+                // $("#cadastrar-tab").tabs({
+                //     active: 
+                // })
 
                 $("#vergerenciar").hide()
                 $("#vercadastrar").show()
             } else {
-                // $("#gerenciar").show()
-                // $("#cadastrar").hide()
-
+                // $("#gerenciar-tab").tabs("option","active")
                 $("#vergerenciar").show()
                 $("#vercadastrar").hide()
             }
@@ -97,7 +108,10 @@ $tabs = isset($_GET['tabs']) ? $_GET['tabs'] : 'gerenciar';
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-list-ul" aria-hidden="true"></i></span>
                                                 </div>
-                                                <input type="text" class="form-control" placeholder="Nome da categoria">
+                                                <input type="text" class="form-control" name="nome" placeholder="Nome da categoria">
+                                            </div>
+                                            <div class="align-right">
+                                                <button type="submit" class="btn btn-block btn-success">Salvar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -108,11 +122,35 @@ $tabs = isset($_GET['tabs']) ? $_GET['tabs'] : 'gerenciar';
                     <div class="col-lg-8 col-md-8 col-sm-12">
                         <div class="card card-success card-outline card-tabs">
                             <div class="card-header">
-                                <h3 class="card-title">Title</h3>
+                                <h3 class="card-title">Catagoria</h3>
                             </div>
                             <div class="card-body">
                                 <div id="vergerenciar" style="display: none;">
-                                    Gerenciar
+
+                                    <table id="table-categoria" class="table table-bordered table-hover dataTable dtr-inline collapsed">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nome</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                                $queryBusca = "select id, nome, status from categoria where idusuario = {$_SESSION['idusuario']}";
+
+                                                $resp = mysqli_query($con,$queryBusca);
+                                                while($row = mysqli_fetch_array($resp)){
+                                                    ?>
+                                                        <tr>
+                                                            <td><?=$row[0]?></td>
+                                                            <td><?=$row[1]?></td>
+                                                            <td><?=$row[2]?></td>
+                                                        </tr>
+                                                    <?php
+                                                }
+                                            ?>
+                                    </table>
 
                                 </div>
                                 <div id="vercadastrar" style="display: none;">
@@ -139,6 +177,10 @@ $tabs = isset($_GET['tabs']) ? $_GET['tabs'] : 'gerenciar';
     <script src="<?= BASE ?>/assets/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?= BASE ?>/assets/js/demo.js"></script>
+
+    <script src="<?= BASED ?>/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= BASED ?>/assets/vendor/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= BASED ?>/assets/vendor/datatables-responsive/js/dataTables.responsive.min.js"></script>
 </body>
 
 </html>
