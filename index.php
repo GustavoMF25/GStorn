@@ -68,7 +68,7 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
                                             <label class="form-label"><small>E-mail</small></label>
                                             <div class="input-group input-group-sm">
                                                 <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                                <input class="form-control" type="email" id="email" name="email" placeholder="Email">
+                                                <input class="form-control" type="text" id="Login" name="login" placeholder="Login">
                                             </div>
                                         </div>
                                         <div class="mb-2">
@@ -97,7 +97,7 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
     <!-- JAVASCRIPT -->
     <script type="text/javascript" src="./app/assets/js/particles.min.js"></script>
     <script type="text/javascript" src="./app/assets/js/particles.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="./assets/js/lottie-player.js"></script>
 
     <!--<script src="./assets/js/particules.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>

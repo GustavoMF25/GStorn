@@ -15,68 +15,58 @@
 session_start();
 ob_start();
 
-$email = $_POST["email"];
-$senha = md5($_POST["password"]);
+$login = $_POST["login"];
+$senha = $_POST["password"];
 
-// if ($login == null || $senha == null) {
-//     $msg = "Por favor, informe login e senha!";
-//     header("location:./?msg=" . $msg);
-// } else {
-include '../app/config/connSistema.php';
-$sql = "
+if ($login == null || $senha == null) {
+    $msg = "Por favor, informe login e senha!";
+    header("location: ../?msg=" . $msg);
+} else {
+    include '../app/config/conn.php';
+    $sql = "
             select 
-                u.idusuario,
+                u.id,
                 u.nome,
                 u.login,
-                u.telefone,
-                u.dtnasc,
                 u.email,
-                u.sexo,
+                u.senha,
+                u.perfil,
                 u.status as 'status'
-            from usuariosistema u
-            where u.email = '$login'
-            and u.senha = '$senha'
+            from usuario u
+            where u.login = '$login'
     ";
-$result = mysqli_query($conSis, $sql);
-// if (mysqli_num_rows($result)) {
-//     $row = mysqli_fetch_array($result);
-//     //Verifica se esta inativo
-//     if ($row[7] == 'i') {
-//         session_destroy();
-//         $msg = "Seu perfil esta inativo :(";
-//         header("location:./index?msg=" . $msg);
-//     }
-//Verifica se esta travado
-//        if ($row[12] == 't') {
-//            session_destroy();
-//            $msg = "Seu perfil esta travado, entre em contato com a administração!";
-//            header("location:./index?msg=" . $msg);
-//        }
+    $result = mysqli_query($con, $sql);
+    if (mysqli_num_rows($result)) {
+        $row = mysqli_fetch_array($result);
+        //     //Verifica se esta inativo
+        if ($row[6] == 'i') {
+            session_destroy();
+            $msg = "Seu perfil esta inativo :(";
+            header("location: ../index?msg=" . $msg);
+        }
+        //Verifica se esta travado
 
-//Verifica se esta ativo ou pendente
-// if ($row[7] == 'a' || $row[7] == 'p') {
-//    $_SESSION["idusuario"] = $row["idusuario"];
-//    $_SESSION["nome"] = $row["nome"];
-//    $_SESSION["login"] = $row["login"];
-//    $_SESSION["sexo"] = $row["sexo"];
-//    $_SESSION["email"] = $row["email"];
-//    $_SESSION["dtnasc"] = $row["dtnasc"];
-//    $_SESSION["perfil"] = $row["perfil"];
-//    $_SESSION["status"] = $row["status"];
-$_SESSION['idusuario'] = 1;
-$_SESSION['nome'] = 'Gustavo Fernandes';
-$_SESSION['login'] = 'gustavo.fernandes';
-$_SESSION['email'] = 'gustavo.fernandes@gstorn.com.br';
-//            $_SESSION["tempo"] = time();
-//            $sesseionId = session_id();
-//            $hoje = date("Y-m-d");
-//            $agora = date("H:i:s");
-//            $insertSessao = "insert into sessao values(null, {$_SESSION['idusuario']}, '{$sesseionId}', '{$hoje}', '{$agora}')";
-//            mysqli_query($con, $insertSessao);
-header("location:../app/permissionamento.php");
-        // }
-//     } else {
-//         $msg = "Login ou senha inválido(s)";
-//         header("location:./index?msg=" . $msg);
-//     }
-// }
+        if (password_verify($senha, $row[4])) {
+            //Verifica se esta ativo ou pendente
+
+            $_SESSION['idusuario'] = $row[0];
+            $_SESSION['nome'] = $row[1];
+            $_SESSION['login'] = $row[2];
+            $_SESSION['email'] = $row[3];
+            $_SESSION['perfil'] = $row[5];
+            $_SESSION["tempo"] = time();
+            $sesseionId = session_id();
+            $hoje = date("Y-m-d");
+            $agora = date("H:i:s");
+            //    $insertSessao = "insert into sessao values(null, {$_SESSION['idusuario']}, '{$sesseionId}', '{$hoje}', '{$agora}')";
+            //            mysqli_query($con, $insertSessao);
+            header("location:../app/permissionamento.php");
+        } else {
+            $msg = "<i class='fa fa-frown-o' aria-hidden='true'></i> <br> Senha incorreta!";
+            header("location: ../index?msg=" . $msg);
+        }
+    } else {
+        $msg = "Login ou senha inválido(s)";
+        header("location: ../index?msg=" . $msg);
+    }
+}

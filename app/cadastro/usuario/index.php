@@ -22,7 +22,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GStorn</title>
+    <title>GStorn - Usuario</title>
 
     <link rel="icon" href="<?= BASE ?>/assets/images/logoGStor.png" />
     <!-- Google Font: Source Sans Pro -->
@@ -37,9 +37,13 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
     <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/icheck-bootstrap/icheck-bootstrap.min.css">
+
+
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/select2/css/select2.min.css">
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // $('.select2').select2();
+            $('.select2').select2({});
 
             mudaTabs('<?= $tabs ?>')
             // BASICO DATATABLE
@@ -72,6 +76,45 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                 $("#gerenciar-tab").tab('show')
             }
         }
+
+
+        function verificaForcaSenha() {
+            let numeros = /([0-9])/;
+            let alfabetoa = /([a-z])/;
+            let alfabetoA = /([A-Z])/;
+            let chEspeciais = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+            let senha = $('#senha').val();
+
+            if (senha.length < 6) {
+                $('#senha').addClass('is-invalid');
+                $('#senha').removeClass('is-valid');
+                $('.status-senha').html("Fraco, insira no mínimo 6 caracteres");
+            } else {
+                if (senha.match(numeros) && senha.match(alfabetoa) && senha.match(alfabetoA) && senha.match(chEspeciais)) {
+                    $('.status-senha').html("Senha Forte!");
+                    $('#senha').addClass('is-valid');
+                    $('#senha').removeClass('is-invalid');
+                    return true;
+                } else {
+                    $('.status-senha').html("Senha Fraca!");
+                    $('#senha').addClass('is-invalid');
+                    $('#senha').removeClass('is-valid');
+                    return false;
+                }
+            }
+        }
+
+        function confirmaSenha() {
+            let senha = $('#senha').val();
+            let confirmaSenha = $('#confirma-senha').val();
+            if (senha !== confirmaSenha) {
+                $('#confirma-senha').addClass('is-invalid');
+                return false;
+            } else {
+                $('#confirma-senha').removeClass('is-invalid');
+                return true;
+            }
+        }
     </script>
 </head>
 
@@ -89,12 +132,12 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h4><small><b>Categorias</b></small></h4>
+                            <h4><small><b>Usuarios</b></small></h4>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?= BASED ?>"><small><b>Inicio</b></small></a></li>
-                                <li class="breadcrumb-item active"><small><b>Cadastro de categoria</b></small></li>
+                                <li class="breadcrumb-item active"><small><b>Cadastro de usuarios</b></small></li>
                             </ol>
                         </div>
                     </div>
@@ -136,15 +179,80 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                             <div class="card-body">
                                 <div class="tab-content" id="custom-tabs-three-tabContent">
                                     <div class="tab-pane fade active show" id="gerenciar" role="tabpanel" aria-labelledby="gerenciar-tab">
-                                        Ver todas as categorias registradas.
+                                        Ver usuarios registrados.
                                     </div>
                                     <div class="tab-pane fade" id="cadastrar" role="tabpanel" aria-labelledby="cadastrar-tab">
-                                        <form method="post" action="./include/gCategoria.php">
-                                            <div class="input-group input-group-sm mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fa fa-list-ul" aria-hidden="true"></i></span>
+                                        <form method="post" action="./include/gUsuario.php">
+                                            <div class=form-group>
+                                                <label><small><b>Nome:</b></small></label>
+                                                <div class="input-group input-group-sm mb-3">
+
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" name="nome" placeholder="Nome da categoria">
                                                 </div>
-                                                <input type="text" class="form-control" name="nome" placeholder="Nome da categoria">
+                                            </div>
+                                            <div class=form-group>
+                                                <label><small><b>Email:</b></small></label>
+                                                <div class="input-group input-group-sm mb-3">
+
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-at" aria-hidden="true"></i></span>
+                                                    </div>
+                                                    <input type="email" class="form-control" name="email" placeholder="Nome da categoria">
+                                                </div>
+                                            </div>
+                                            <div class=form-group>
+                                                <label><small><b>Login:</b></small></label>
+                                                <div class="input-group input-group-sm mb-3">
+
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" name="login" placeholder="nome.sobrenome">
+                                                </div>
+                                            </div>
+                                            <div class='form-group'>
+                                                <label for='senha'> Senha </label>
+                                                <div class="input-group input-group-sm has-validation">
+                                                    <span class="input-group-text pointer" id="olho">
+                                                        <i class="fas fa-eye" id="mostra-senha"></i>
+                                                        <i class="fas fa-eye-slash" id="oculta-senha" style="display:none;"></i>
+                                                    </span>
+                                                    <input class='form-control senha' id="senha" onkeyup="verificaForcaSenha()" name="senha" type="password" required>
+                                                    <div class="invalid-feedback">
+                                                        <b class="status-senha">Senha fraca!</b>
+                                                    </div>
+                                                    <div class="valid-feedback">
+                                                        <b class="status-senha">Senha forte!</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='form-group'>
+                                                <label for='senha'> Confirme a senha </label>
+                                                <div class="input-group input-group-sm has-validation">
+                                                    <span class="input-group-text pointer" id="olho">
+                                                        <i class="fas fa-lock"></i>
+                                                    </span>
+                                                    <input class='form-control senha' id="confirma-senha" onkeyup="confirmaSenha()" name="confirma-senha" type="password" required>
+                                                    <div class="invalid-feedback is-invalid">
+                                                        <b>Senhas não coincidem!</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <div class="icheck-primary d-inline mx-3">
+                                                    <input type="radio" value="a" id="radioPrimary1" name="tipodeusuario">
+                                                    <label for="radioPrimary1">Administrador</label>
+                                                </div>
+
+
+
+                                                <div class="icheck-primary d-inline">
+                                                    <input type="radio" value="u" id="radioPrimary2" name="tipodeusuario">
+                                                    <label for="radioPrimary2">Usuario</label>
+                                                </div>
                                             </div>
                                             <div class="align-right">
                                                 <button type="submit" class="btn btn-block btn-success">Salvar</button>
@@ -158,7 +266,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                     <div class="col-lg-8 col-md-8 col-sm-12">
                         <div class="card card-success card-outline card-tabs">
                             <div class="card-header">
-                                <h3 class="card-title">Catagoria</h3>
+                                <h3 class="card-title">Usuarios</h3>
                             </div>
                             <div class="card-body">
                                 <div id="vergerenciar" style="display: none;">
@@ -168,7 +276,9 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                             <tr>
                                                 <th>#</th>
                                                 <th>Nome</th>
+                                                <th>Login</th>
                                                 <th>Status</th>
+                                                <th>Perfil</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -176,17 +286,21 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                             $queryBusca = "select 
                                                                 id,
                                                                 nome,
-                                                                status 
-                                                            from categoria 
-                                                            where idusuario = {$_SESSION['idusuario']}";
+                                                                login,
+                                                                status,
+                                                                perfil
+                                                            from usuario";
 
                                             $resp = mysqli_query($con, $queryBusca);
                                             while ($row = mysqli_fetch_array($resp)) {
-                                                $status = $row[2] == 'a' ? "<span class='badge badge-success'>Ativado</span>" : "<span class='badge badge-danger'>Desativado</span>";
+                                                $status = $row[3] == 'a' ? "<span class='badge badge-success'>Ativado</span>" : "<span class='badge badge-danger'>Desativado</span>";
+                                                $perfil = $row[4] == 'a' ? "<span class='badge badge-success'>Admin</span>" : "<span class='badge badge-warning'>Usuario</span>";
                                             ?>
                                                 <tr>
                                                     <td class="text-center"><small><b>#<?= $row[0] ?></b></small></td>
                                                     <td class="text-center"><?= $row[1] ?></td>
+                                                    <td class="text-center"><?= $row[2] ?></td>
+                                                    <td class="text-center"><?= $perfil ?></td>
                                                     <td class="text-center"><?= $status ?></td>
                                                 </tr>
                                             <?php
@@ -197,10 +311,11 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                 </div>
                                 <div id="vercadastrar" style="display: none;">
                                     <div class="text-center font-weight-bold">
-                                        <span style="font-size: 18px;"> Cadastre suas categorias para facilitar a pesquisa de produtos no estoque. </span>
+                                        <span style="font-size: 18px;"> Seja bem vindo ao cadastro de usuarios! </span>
+                                        <p style="font-size: 15px;"> Você está prestes a entrar em um mundo novo de gerenciamento de estoque e vai melhorar o desenpenho do seu negocio com essa nova ferramenta. </p>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <lottie-player src="<?= BASE ?>/assets/animation/category.json" background="transparent" speed="1" style="width: 600px; height: 100px;" loop autoplay>
+                                        <lottie-player src="<?= BASE ?>/assets/animation/welcome.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay>
                                         </lottie-player>
                                     </div>
                                 </div>
@@ -229,6 +344,8 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
 
     <script src="<?= BASED ?>/assets/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="<?= BASED ?>/assets/vendor/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="<?= BASED ?>/assets/vendor/select2/js/select2.min.js"></script>
 </body>
 
 </html>
