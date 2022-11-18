@@ -18,6 +18,10 @@ ob_start();
 $login = $_POST["login"];
 $senha = $_POST["password"];
 
+
+
+
+
 if ($login == null || $senha == null) {
     $msg = "Por favor, informe login e senha!";
     header("location: ../?msg=" . $msg);

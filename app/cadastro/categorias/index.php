@@ -162,38 +162,38 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                             </div>
                             <div class="card-body">
                                 <div id="vergerenciar" style="display: none;">
-
-                                    <table id="table-categoria" class="table table-bordered table-hover dataTable dtr-inline collapsed">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Nome</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $queryBusca = "select 
+                                    <div class="table-responsive">
+                                        <table id="table-categoria" class="table table-bordered table-hover dtr-inline collapsed">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Nome</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $queryBusca = "select 
                                                                 id,
                                                                 nome,
                                                                 status 
                                                             from categoria 
                                                             where idusuario = {$_SESSION['idusuario']}";
 
-                                            $resp = mysqli_query($con, $queryBusca);
-                                            while ($row = mysqli_fetch_array($resp)) {
-                                                $status = $row[2] == 'a' ? "<span class='badge badge-success'>Ativado</span>" : "<span class='badge badge-danger'>Desativado</span>";
-                                            ?>
-                                                <tr>
-                                                    <td class="text-center"><small><b>#<?= $row[0] ?></b></small></td>
-                                                    <td class="text-center"><?= $row[1] ?></td>
-                                                    <td class="text-center"><?= $status ?></td>
-                                                </tr>
-                                            <?php
-                                            }
-                                            ?>
-                                    </table>
-
+                                                $resp = mysqli_query($con, $queryBusca);
+                                                while ($row = mysqli_fetch_array($resp)) {
+                                                    $status = $row[2] == 'a' ? "<span class='badge badge-success'>Ativado</span>" : "<span class='badge badge-danger'>Desativado</span>";
+                                                ?>
+                                                    <tr>
+                                                        <td class="text-center"><small><b>#<?= $row[0] ?></b></small></td>
+                                                        <td class="text-center"><?= $row[1] ?></td>
+                                                        <td class="text-center"><?= $status ?></td>
+                                                    </tr>
+                                                <?php
+                                                }
+                                                ?>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div id="vercadastrar" style="display: none;">
                                     <div class="text-center font-weight-bold">

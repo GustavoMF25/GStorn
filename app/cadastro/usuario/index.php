@@ -47,9 +47,9 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
 
             mudaTabs('<?= $tabs ?>')
             // BASICO DATATABLE
-            $("#table-categoria").DataTable({
+            $("#table-usuario").DataTable({
                 "dom": 'rtip',
-                "responsive": true,
+                "responsive": false,
                 "searching": false,
                 "info": false,
                 "language": {
@@ -162,7 +162,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
             </section>
 
 
-            <section class="content">
+            <section class="content mx-3">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="card card-success card-outline card-tabs">
@@ -270,20 +270,20 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                             </div>
                             <div class="card-body">
                                 <div id="vergerenciar" style="display: none;">
-
-                                    <table id="table-categoria" class="table table-bordered table-hover dataTable dtr-inline collapsed">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Nome</th>
-                                                <th>Login</th>
-                                                <th>Status</th>
-                                                <th>Perfil</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $queryBusca = "select 
+                                    <div class="table-responsive">
+                                        <table id="table-usuario" class="table table-bordered table-sm table-hover dtr-inline collapsed">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Nome</th>
+                                                    <th>Login</th>
+                                                    <th>Status</th>
+                                                    <th>Perfil</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $queryBusca = "select 
                                                                 id,
                                                                 nome,
                                                                 login,
@@ -291,25 +291,25 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                                                 perfil
                                                             from usuario";
 
-                                            $resp = mysqli_query($con, $queryBusca);
-                                            while ($row = mysqli_fetch_array($resp)) {
-                                                $status = $row[3] == 'a' ? "<span class='badge badge-success'>Ativado</span>" : "<span class='badge badge-danger'>Desativado</span>";
-                                                $perfil = $row[4] == 'a' ? "<span class='badge badge-success'>Admin</span>" : "<span class='badge badge-warning'>Usuario</span>";
-                                            ?>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <small><b>#<?= $row[0] ?></b></small> <img class="rounded-circle " src="<?=$_SESSION['perfil']['foto']?>" width="30" alt="">
-                                                    </td>
-                                                    <td class="text-center"><?= $row[1] ?></td>
-                                                    <td class="text-center"><?= $row[2] ?></td>
-                                                    <td class="text-center"><?= $perfil ?></td>
-                                                    <td class="text-center"><?= $status ?></td>
-                                                </tr>
-                                            <?php
-                                            }
-                                            ?>
-                                    </table>
-
+                                                $resp = mysqli_query($con, $queryBusca);
+                                                while ($row = mysqli_fetch_array($resp)) {
+                                                    $status = $row[3] == 'a' ? "<span class='badge badge-success'>Ativado</span>" : "<span class='badge badge-danger'>Desativado</span>";
+                                                    $perfil = $row[4] == 'a' ? "<span class='badge badge-success'>Admin</span>" : "<span class='badge badge-warning'>Usuario</span>";
+                                                ?>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <small><b>#<?= $row[0] ?></b></small> <img class="rounded-circle " src="<?= $_SESSION['perfil']['foto'] ?>" width="30" alt="">
+                                                        </td>
+                                                        <td class="text-center"><?= $row[1] ?></td>
+                                                        <td class="text-center"><?= $row[2] ?></td>
+                                                        <td class="text-center"><?= $perfil ?></td>
+                                                        <td class="text-center"><?= $status ?></td>
+                                                    </tr>
+                                                <?php
+                                                }
+                                                ?>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div id="vercadastrar" style="display: none;">
                                     <div class="text-center font-weight-bold">
@@ -317,7 +317,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                         <p style="font-size: 15px;"> Você está prestes a entrar em um mundo novo de gerenciamento de estoque e vai melhorar o desenpenho do seu negocio com essa nova ferramenta. </p>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <lottie-player src="<?= BASE ?>/assets/animation/welcome.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay>
+                                        <lottie-player src="<?= BASE ?>/assets/animation/welcome.json" background="transparent" speed="1" style="width: 500px; height: 500px;" loop autoplay>
                                         </lottie-player>
                                     </div>
                                 </div>

@@ -1,15 +1,33 @@
 <?php
 include '../../config/config.php';
+include '../../config/conn.php';
+
+$tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
+
+// function ativaTab($tab)
+// { //"0" é o valor padrão para tab principal
+//     if (isset($_GET['tab']) and $_GET['tab'] == $tab) {
+//         return "active";
+//     } elseif (
+//         $tab == "0"
+//         and !isset($_GET['tab'])
+//     ) {
+//         return "active";
+//     }
+// }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GStorn</title>
+    <title>GStorn - Produtos</title>
 
     <link rel="icon" href="<?= BASE ?>/assets/images/logoGStor.png" />
+
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/select2/css/select2.min.css">
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -17,6 +35,53 @@ include '../../config/config.php';
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= BASE ?>/assets/css/adminlte.min.css">
     <link rel="stylesheet" href="<?= BASED ?>/assets/css/main.css">
+
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/icheck-bootstrap/icheck-bootstrap.min.css">
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.select2').select2({});
+
+            mudaTabs('<?= $tabs ?>')
+            $(".money").maskMoney()
+            // BASICO DATATABLE
+            $("#table-categoria").DataTable({
+                "dom": 'rtip',
+                "responsive": true,
+                "searching": false,
+                "info": false,
+                "language": {
+                    "paginate": {
+                        "next": "Próximo",
+                        "previous": "Anterior",
+                        "first": "Primeiro",
+                        "last": "Último"
+                    },
+                }
+            })
+        })
+
+
+
+        function mudaTabs(atual = null) {
+            if (atual == 'cadastrar-tab') {
+                $("#cadastrar-tab").tab('show')
+                $("#vergerenciar").hide()
+                $("#vercadastrar").show()
+            } else {
+                $("#vergerenciar").show()
+                $("#vercadastrar").hide()
+                $("#gerenciar-tab").tab('show')
+            }
+        }
+    </script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -28,25 +93,40 @@ include '../../config/config.php';
         include '../../include/sidebar.php';
         ?>
 
-
-        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Bem vindo!</h1>
+                            <h4><small><b>Produtos</b></small></h4>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Blank Page</li>
+                                <li class="breadcrumb-item"><a href="<?= BASED ?>"><small><b>Inicio</b></small></a></li>
+                                <li class="breadcrumb-item active"><small><b>Cadastro de produtos</b></small></li>
                             </ol>
                         </div>
                     </div>
-                </div><!-- /.container-fluid -->
+                </div>
+                <?php
+                if (isset($_GET['msg']) && $_GET['acao'] == 1) {
+                ?>
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <i class="icon fas fa-ban"></i> <?= $_GET['msg'] ?>
+                    </div>
+                <?php
+                } else if (isset($_GET['msg']) && $_GET['acao'] == 0) {
+                ?>
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <i class="icon fas fa-check"></i> <?= $_GET['msg'] ?>
+                    </div>
+                <?php
+                }
+                ?>
             </section>
+
 
             <section class="content">
                 <div class="row">
@@ -55,20 +135,111 @@ include '../../config/config.php';
                             <div class="card-header p-0 pt-1 border-bottom-0">
                                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="gerenciar-tab" data-toggle="pill" href="#gerenciar" role="tab" aria-controls="gerenciar" aria-selected="true">Gerenciar</a>
+                                        <a class="nav-link active" onclick="mudaTabs('gerenciar-tab')" id="gerenciar-tab" data-toggle="pill" href="#gerenciar" role="tab" aria-controls="gerenciar" aria-selected="true">Produtos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link"  id="cadastrar-tab" data-toggle="pill" href="#cadastrar" role="tab" aria-controls="cadastrar" aria-selected="false">Cadastrar</a>
+                                        <a class="nav-link" id="cadastrar-tab" onclick="mudaTabs('cadastrar-tab')" data-toggle="pill" href="#cadastrar" role="tab" aria-controls="cadastrar" aria-selected="false">Cadastrar</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="card-body">
                                 <div class="tab-content" id="custom-tabs-three-tabContent">
                                     <div class="tab-pane fade active show" id="gerenciar" role="tabpanel" aria-labelledby="gerenciar-tab">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada lacus ullamcorper dui molestie, sit amet congue quam finibus. Etiam ultricies nunc non magna feugiat commodo. Etiam odio magna, mollis auctor felis vitae, ullamcorper ornare ligula. Proin pellentesque tincidunt nisi, vitae ullamcorper felis aliquam id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin id orci eu lectus blandit suscipit. Phasellus porta, ante et varius ornare, sem enim sollicitudin eros, at commodo leo est vitae lacus. Etiam ut porta sem. Proin porttitor porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non consequat neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus. Cras lacinia erat eget sapien porta consectetur.
+                                        Ver todos os produtos cadastrados.
                                     </div>
                                     <div class="tab-pane fade" id="cadastrar" role="tabpanel" aria-labelledby="cadastrar-tab">
-                                        Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                                        <form method="post" action="./include/gProduto.php">
+                                            <div class=form-group>
+                                                <label><small><b>Nome:</b></small></label>
+                                                <div class="input-group input-group-sm mb-3">
+
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-cubes" aria-hidden="true"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" name="nome" placeholder="Nome do produto">
+                                                </div>
+                                            </div>
+                                            <div class=form-group>
+                                                <label><small><b>Código:</b></small></label>
+                                                <div class="input-group input-group-sm mb-3">
+
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><b>#</b></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" name="codigo" placeholder="Código do Produto">
+                                                </div>
+                                            </div>
+                                            <div class=form-group>
+                                                <label><small><b>Custo:</b></small></label>
+                                                <div class="input-group input-group-sm mb-3">
+
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><b>R$</b></span>
+                                                    </div>
+                                                    <input type="text" class="form-control money" name="custo" placeholder="Custo do produto">
+                                                </div>
+                                            </div>
+                                            <div class=form-group>
+                                                <label><small><b>Venda:</b></small></label>
+                                                <div class="input-group input-group-sm mb-3">
+
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><b>R$</b></span>
+                                                    </div>
+                                                    <input type="text" class="form-control money" name="venda" placeholder="Valor de venda do produto">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                            <label for='descricao'> <small><b>Descricao:</b></small></label>
+                                                <textarea class="form-control" name="descricao" id="descricao" rows="3" placeholder="Enter ..." style="height: 89px;resize: none;"></textarea>
+                                            </div>
+
+                                            <div class='form-group'>
+                                                <label for='categoria'> <small><b>Categoria:</b></small></label>
+                                                <select class="form-control select2" id="categoria" style="width: 100%;" name="categoria">
+                                                    <option value="">Selecione a categoria</option>
+                                                    <?php
+                                                    $queryBusca = "select 
+                                                                id,
+                                                                nome
+                                                            from categoria 
+                                                            where idusuario = {$_SESSION['idusuario']}";
+
+                                                    $resp = mysqli_query($con, $queryBusca);
+                                                    while ($row = mysqli_fetch_array($resp)) {
+                                                    ?>
+                                                        <option value="<?= $row[0] ?>"><?= $row[1] ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+
+                                            <div class='form-group'>
+                                                <label for='fornecedor'><small><b> Fornecedor:</b></small></label>
+                                                <select class="form-control select2" id="fornecedor" style="width: 100%;" name="fornecedor">
+                                                    <option value="">Selecione um fornecedor</option>
+                                                    <?php
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <!-- <div class="form-group clearfix">
+                                                <div class="icheck-primary d-inline mx-3">
+                                                    <input type="radio" value="a" id="radioPrimary1" name="tipodeusuario">
+                                                    <label for="radioPrimary1">Administrador</label>
+                                                </div>
+
+
+
+                                                <div class="icheck-primary d-inline">
+                                                    <input type="radio" value="u" id="radioPrimary2" name="tipodeusuario">
+                                                    <label for="radioPrimary2">Usuario</label>
+                                                </div>
+                                            </div> -->
+                                            <div class="align-right">
+                                                <button type="submit" class="btn btn-block btn-success">Salvar</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -77,12 +248,72 @@ include '../../config/config.php';
                     <div class="col-lg-8 col-md-8 col-sm-12">
                         <div class="card card-success card-outline card-tabs">
                             <div class="card-header">
-                                <h3 class="card-title">Title</h3>
+                                <h3 class="card-title">Produtos</h3>
                             </div>
                             <div class="card-body">
-                                <?php
-                                print_r($_SESSION);
-                                ?>
+                                <div id="vergerenciar" style="display: none;">
+
+                                    <div class="table-responsive">
+                                        <table id="table-categoria" class="table table-sm table-bordered table-hover  dtr-inline collapsed">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Nome</th>
+                                                    <th>Código</th>
+                                                    <th>Descrição</th>
+                                                    <th>Valor de custo</th>
+                                                    <th>Valor de venda</th>
+                                                    <th>Categoria</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $queryBusca = "select 
+                                                                prod.id,
+                                                                prod.nome,
+                                                                prod.codigo,
+                                                                prod.custo,
+                                                                prod.venda,
+                                                                prod.descricao,
+                                                                cat.nome,
+                                                                prod.status
+                                                            from produto prod
+                                                            left join categoria cat on(cat.id = prod.idcategoria) where prod.idusuario = {$_SESSION['idusuario']}
+                                                            ";
+
+                                                $resp = mysqli_query($con, $queryBusca);
+                                                while ($row = mysqli_fetch_array($resp)) {
+                                                    $status = $row[7] == 'a' ? "<span class='badge badge-success'>Ativado</span>" : "<span class='badge badge-danger'>Desativado</span>";
+                                                ?>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <small><b>#<?= $row[0] ?></b></small>
+                                                        </td>
+                                                        <td class="text-center"><?= $row[1] ?></td>
+                                                        <td class="text-center"><?= $row[2] ?></td>
+                                                        <td class="text-center"><?= $row[3] ?></td>
+                                                        <td class="text-center"><?= $row[4] ?></td>
+                                                        <td class="text-center"><?= $row[5] ?></td>
+                                                        <td class="text-center"><?= $row[6] ?></td>
+                                                        <td class="text-center"><?= $status ?></td>
+                                                    </tr>
+                                                <?php
+                                                }
+                                                ?>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="vercadastrar" style="display: none;">
+                                    <div class="text-center ">
+                                        <span class="font-weight-bold" style="font-size: 18px;"> Seja bem vindo ao cadastro de produtos! </span>
+                                        <p style="font-size: 15px;"> Realize o cadastros dos seus produtos para que seja possível vizualiar no sistema e realizar as devidas movimentações de entrada e saida de estoque. </p>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <lottie-player src="<?= BASE ?>/assets/animation/product.json" background="transparent" speed="1" style="width: 500px; height: 500px;" loop autoplay>
+                                        </lottie-player>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,31 +323,25 @@ include '../../config/config.php';
 
 
         <?php
-        include "./include/footer.php";
+        include "../../include/footer.php";
         ?>
-        <!-- <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.2.0
-                </div>
-                <strong>Copyright &copy; 2022 <a href="https://syntaxweb.com.br">Syntax Web</a>.</strong> All rights reserved.
-            </footer> -->
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
     </div>
-    <!-- ./wrapper -->
 
     <!-- jQuery -->
     <script src="<?= BASE ?>/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?= BASED ?>/assets/vendor/jquery/jquery.maskMoney.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="<?= BASE ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?= BASE ?>/assets/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?= BASE ?>/assets/js/demo.js"></script>
+    <script src="<?= BASE ?>/assets/js/lottie-player.js"></script>
+
+    <script src="<?= BASED ?>/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= BASED ?>/assets/vendor/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="<?= BASED ?>/assets/vendor/select2/js/select2.min.js"></script>
 </body>
 
 </html>

@@ -49,7 +49,7 @@ if (empty($login) || empty($nome) || empty($email) || empty($senha)) {
     }
 }
 
-print_r($response);
+
 
 mysqli_close($con);
 header("Location: ../?msg={$response['msg']}&acao={$response['acao']}&tab=cadastrar-tab");
