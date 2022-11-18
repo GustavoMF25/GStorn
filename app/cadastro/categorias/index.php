@@ -166,9 +166,9 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                         <table id="table-categoria" class="table table-bordered table-hover dtr-inline collapsed">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Nome</th>
-                                                    <th>Status</th>
+                                                    <th class="text-center">#</th>
+                                                    <th class="text-center">Nome</th>
+                                                    <th class="text-center">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

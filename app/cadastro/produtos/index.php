@@ -191,7 +191,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                             </div>
                                             <div class="form-group">
                                             <label for='descricao'> <small><b>Descricao:</b></small></label>
-                                                <textarea class="form-control" name="descricao" id="descricao" rows="3" placeholder="Enter ..." style="height: 89px;resize: none;"></textarea>
+                                                <textarea class="form-control" name="descricao" id="descricao" rows="3" placeholder="Descrição do produto..." style="height: 89px;resize: none;"></textarea>
                                             </div>
 
                                             <div class='form-group'>
@@ -223,19 +223,6 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                                     ?>
                                                 </select>
                                             </div>
-                                            <!-- <div class="form-group clearfix">
-                                                <div class="icheck-primary d-inline mx-3">
-                                                    <input type="radio" value="a" id="radioPrimary1" name="tipodeusuario">
-                                                    <label for="radioPrimary1">Administrador</label>
-                                                </div>
-
-
-
-                                                <div class="icheck-primary d-inline">
-                                                    <input type="radio" value="u" id="radioPrimary2" name="tipodeusuario">
-                                                    <label for="radioPrimary2">Usuario</label>
-                                                </div>
-                                            </div> -->
                                             <div class="align-right">
                                                 <button type="submit" class="btn btn-block btn-success">Salvar</button>
                                             </div>
@@ -257,14 +244,14 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                         <table id="table-categoria" class="table table-sm table-bordered table-hover  dtr-inline collapsed">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Nome</th>
-                                                    <th>Código</th>
-                                                    <th>Descrição</th>
-                                                    <th>Valor de custo</th>
-                                                    <th>Valor de venda</th>
-                                                    <th>Categoria</th>
-                                                    <th>Status</th>
+                                                    <th class="text-center">#</th>
+                                                    <th class="text-center">Nome</th>
+                                                    <th class="text-center">Código</th>
+                                                    <th class="text-center">Valor de custo</th>
+                                                    <th class="text-center">Valor de venda</th>
+                                                    <th class="text-center">Descrição</th>
+                                                    <th class="text-center">Categoria</th>
+                                                    <th class="text-center">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -292,8 +279,8 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                                         </td>
                                                         <td class="text-center"><?= $row[1] ?></td>
                                                         <td class="text-center"><?= $row[2] ?></td>
-                                                        <td class="text-center"><?= $row[3] ?></td>
-                                                        <td class="text-center"><?= $row[4] ?></td>
+                                                        <td class="text-center">R$ <?= $row[3] ?></td>
+                                                        <td class="text-center">R$ <?= $row[4] ?></td>
                                                         <td class="text-center"><?= $row[5] ?></td>
                                                         <td class="text-center"><?= $row[6] ?></td>
                                                         <td class="text-center"><?= $status ?></td>

@@ -8,6 +8,9 @@ session_start();
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Sao_Paulo');
 
+ini_set('display_errors', 1);
+ini_set('display_startup_erros', 1);
+
 //DOMAIN = dominio Ex:.. syntaxweb
 define('DOMAIN', isset($_SERVER['HTTP_Host']) ? $_SERVER['HTTP_Host'] : $_SERVER['SERVER_NAME']);
 

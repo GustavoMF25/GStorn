@@ -182,7 +182,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                         Ver usuarios registrados.
                                     </div>
                                     <div class="tab-pane fade" id="cadastrar" role="tabpanel" aria-labelledby="cadastrar-tab">
-                                        <form method="post" action="./include/gUsuario.php">
+                                        <form method="post" autocomplete="off" action="./include/gUsuario.php">
                                             <div class=form-group>
                                                 <label><small><b>Nome:</b></small></label>
                                                 <div class="input-group input-group-sm mb-3">
@@ -274,11 +274,11 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                         <table id="table-usuario" class="table table-bordered table-sm table-hover dtr-inline collapsed">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Nome</th>
-                                                    <th>Login</th>
-                                                    <th>Status</th>
-                                                    <th>Perfil</th>
+                                                    <th class="text-center">#</th>
+                                                    <th class="text-center">Nome</th>
+                                                    <th class="text-center">Login</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Perfil</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
