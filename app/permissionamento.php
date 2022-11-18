@@ -4,7 +4,7 @@
 include_once './config/conn.php';
 
 session_start();
-$nomeusuario = $_SESSION['nomesobrenome'];
+$nomeusuario = $_SESSION['nome'];
 $ipcolaborador = $_SESSION['ip'];
 $idusuario = $_SESSION['idusuario'];
 $agora = date('Y-m-d H:i:s');
@@ -46,16 +46,15 @@ $host = $_SERVER['HTTP_HOST'];
 $UrlAtual = $protocolo . '://' . $host;
 $url = $UrlAtual;
 
-$select_foto = "select foto from usuario where idusuario = " . $idusuario;
+$select_foto = "select foto from usuario where id = " . $idusuario;
 $mysql_foto = mysqli_query($con, $select_foto);
 $foto = mysqli_fetch_array($mysql_foto);
 
 if ($foto[0] <> "") {
     $_SESSION['perfil']['foto'] = $url . "/app/perfil" . $foto['foto'];
+} else {
+    $_SESSION['perfil']['foto'] = $url . "/GStorn/assets/images/avatar.png";
 }
-//else {
-//    $_SESSION['perfil']['foto'] = $url . "/assets/images/gedoc/perfil.png";
-//}
 
 //$select_acessos = "select 
 //                        count(idlogacesso) 

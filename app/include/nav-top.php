@@ -107,13 +107,13 @@
         </li>
         <li class="nav-item dropdown">
             <a href="javascript:void(0);" class="nav-link" data-toggle="dropdown" aria-expanded="false">
-                <img class="rounded-circle " src="<?= BASE ?>/assets/images/eu.jpg" width="30" alt="">
+                <img class="rounded-circle " src="<?= $_SESSION['perfil']['foto'] ?>" width="30" alt="">
                 <span class="badge badge-success navbar-badge">2</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg p-2 dropdown-menu-right">
                 <div class="p-3 d-flex justify-content-center">
                     <div class="m-r-10">
-                        <img src="<?= BASE ?>/assets/images/eu.jpg" alt="Usuário" width="100" class="img-circle " style="">
+                        <img src="<?= $_SESSION['perfil']['foto'] ?>" alt="Usuário" width="100" class="img-circle " style="">
                     </div>
                 </div>
                 <div class="drop-right text-center">

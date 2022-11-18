@@ -38,6 +38,7 @@ if (empty($login) || empty($nome) || empty($email) || empty($senha)) {
                                                '{$login}',
                                                '{$password}',
                                                'a',
+                                               '',
                                                '{$tipodeusuario}',
                                                '$data',
                                                '$hora')";

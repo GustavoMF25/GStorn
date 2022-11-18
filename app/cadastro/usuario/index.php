@@ -297,7 +297,9 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                                 $perfil = $row[4] == 'a' ? "<span class='badge badge-success'>Admin</span>" : "<span class='badge badge-warning'>Usuario</span>";
                                             ?>
                                                 <tr>
-                                                    <td class="text-center"><small><b>#<?= $row[0] ?></b></small></td>
+                                                    <td class="text-center">
+                                                        <small><b>#<?= $row[0] ?></b></small> <img class="rounded-circle " src="<?=$_SESSION['perfil']['foto']?>" width="30" alt="">
+                                                    </td>
                                                     <td class="text-center"><?= $row[1] ?></td>
                                                     <td class="text-center"><?= $row[2] ?></td>
                                                     <td class="text-center"><?= $perfil ?></td>

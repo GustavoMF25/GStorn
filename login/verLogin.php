@@ -53,7 +53,7 @@ if ($login == null || $senha == null) {
             $_SESSION['nome'] = $row[1];
             $_SESSION['login'] = $row[2];
             $_SESSION['email'] = $row[3];
-            $_SESSION['perfil'] = $row[5];
+            $_SESSION['tipoperfil'] = $row[5];
             $_SESSION["tempo"] = time();
             $sesseionId = session_id();
             $hoje = date("Y-m-d");

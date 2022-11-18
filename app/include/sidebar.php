@@ -12,7 +12,7 @@
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?= BASE ?>/assets/images/eu.jpg" alt="AdminLTE Logo" class="img-circle elevation-2" style="">
+                <img src="<?= $_SESSION['perfil']['foto'] ?>" alt="AdminLTE Logo" class="img-circle elevation-2" style="">
                 <!--<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
                 <!--<i class="fa fa-user-circle img-circle elevation-2" aria-hidden="true" style="color: #fafafa;"></i>-->
             </div>
@@ -49,12 +49,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <?php
-                        if ($_SESSION['perfil'] == 'a') {
+                        if ($_SESSION['tipoperfil'] == 'a') {
                         ?>
                             <li class="nav-item">
 
                                 <a href="<?= BASED ?>/cadastro/usuario/" class="nav-link">
-                                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
                                     <p>Usuario</p>
                                 </a>
                             </li>
