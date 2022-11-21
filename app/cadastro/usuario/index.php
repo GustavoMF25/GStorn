@@ -277,8 +277,9 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                                     <th class="text-center">#</th>
                                                     <th class="text-center">Nome</th>
                                                     <th class="text-center">Login</th>
-                                                    <th class="text-center">Status</th>
                                                     <th class="text-center">Perfil</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Ação</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -304,6 +305,11 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                                         <td class="text-center"><?= $row[2] ?></td>
                                                         <td class="text-center"><?= $perfil ?></td>
                                                         <td class="text-center"><?= $status ?></td>
+                                                        <td class="text-center">
+                                                            <a href="<?= BASED ?>/perfil/?id=<?= $row[0] ?>">
+                                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                 <?php
                                                 }

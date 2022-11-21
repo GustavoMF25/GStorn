@@ -1,6 +1,7 @@
 <?php
 include '../../../config/config.php';
 include '../../../config/conn.php';
+include '../../../config/funcao.php';
 
 $nome = mysqli_real_escape_string($con, trim($_POST['nome']));
 $email = mysqli_real_escape_string($con, trim($_POST['email']));
@@ -43,12 +44,13 @@ if (empty($login) || empty($nome) || empty($email) || empty($senha)) {
                                                '$data',
                                                '$hora')";
     if (mysqli_query($con, $sqlUsuario)) {
-        $response= ['msg' => "Usuário \"$nome\" cadastrado com sucesso!", "acao" => 0];
+        $response = ['msg' => "Usuário \"$nome\" cadastrado com sucesso!", "acao" => 0];
     } else {
         $response = ['msg' => "Falha ao registrar o usuário \"$nome\".", "acao" => 1];
     }
 }
 
+LogSistema($con, 'CadastroUsuario', $response['msg'], $_SESSION['idusuario']);
 
 
 mysqli_close($con);

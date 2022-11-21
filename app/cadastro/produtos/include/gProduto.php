@@ -52,6 +52,6 @@ if (!empty($nome)) {
 } else {
     $response = ['msg' => "Preencha todos os campos corretamente!", "acao" => 1];
 }
-
+LogSistema($con, 'CadastroProduto', $response['msg'], $_SESSION['idusuario']);
 mysqli_close($con);
 header("Location: ../?msg={$response['msg']}&acao={$response['acao']}&tab=cadastrar-tab");

@@ -46,10 +46,10 @@ $base = array_reverse($tempBase);
 define('BASE', implode('/', $base));
 
 //Valida a Sessão
-//if (!isset($_SESSION['idusuario'])) {
-//    $text = "Necessário realizar login para continuar";
-//    header("Location: " . BASE . "/index.php?msg=$text&acao=1");
-//} 
+if (!isset($_SESSION['idusuario'])) {
+   $text = "Necessário realizar login para continuar";
+   header("Location: " . BASE . "/index.php?msg=$text&acao=1");
+} 
 //elseif ($_SESSION["tempo"] + 60 * 60 < time()) {
 //    session_destroy();
 //    $text = "Sessão expirada";

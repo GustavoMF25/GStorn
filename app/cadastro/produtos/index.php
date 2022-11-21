@@ -128,7 +128,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
             </section>
 
 
-            <section class="content">
+            <section class="content mx-3">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="card card-success card-outline card-tabs">
