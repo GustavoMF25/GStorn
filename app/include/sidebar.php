@@ -73,6 +73,12 @@
                                 <p>Categorias</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?= BASED ?>/cadastro/estoque/" class="nav-link">
+                                <i class="fa fa-archive" aria-hidden="true"></i>
+                                <p>Estoque</p>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>

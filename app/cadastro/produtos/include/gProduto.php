@@ -1,6 +1,9 @@
 <?php
+
 include '../../../config/config.php';
 include '../../../config/conn.php';
+include '../../../config/funcao.php';
+
 
 $nome = isset($_POST['nome']) ? $_POST['nome'] : '';
 $codigo = isset($_POST['codigo']) ? $_POST['codigo'] : '';
@@ -13,8 +16,9 @@ $data = date('Y-m-d');
 $hora = date('H:i:s');
 $response = [];
 
-if (!empty($nome)) {
-    try {
+try {
+
+    if (!empty($nome)) {
         $query = "insert into produto (
                                     nome,
                                     codigo,
@@ -43,15 +47,20 @@ if (!empty($nome)) {
 
         if (!mysqli_query($con, $query)) {
             $response = ['msg' => "Falha ao registrar o produto \"$nome\" ", "acao" => 1];
+            if (mysqli_error($con)) {
+                // Exibe o erro do SQL no log
+                LogSistema($con, 'CadastroProduto', $response['msg'] . " -> " . explode(';', mysqli_error($con))[0], $_SESSION['idusuario']);
+            }
         } else {
             $response = ['msg' => "Produto \"$nome\" cadastrado com sucesso!", "acao" => 0];
         }
-    } catch (Exception $e) {
-        print_r($e);
+    } else {
+        $response = ['msg' => "Preencha todos os campos corretamente!", "acao" => 1];
     }
-} else {
-    $response = ['msg' => "Preencha todos os campos corretamente!", "acao" => 1];
+} catch (Exception $e) {
+    $response = ['msg' => "Erro ao realizar o cadastro do produto \"$nome\" -> $e !", "acao" => 1];
 }
+
 LogSistema($con, 'CadastroProduto', $response['msg'], $_SESSION['idusuario']);
 mysqli_close($con);
 header("Location: ../?msg={$response['msg']}&acao={$response['acao']}&tab=cadastrar-tab");
