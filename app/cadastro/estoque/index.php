@@ -28,7 +28,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?= BASE ?>/assets/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?= BASE ?>/assets/vendor/font-awesome/css/font-awesome.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= BASE ?>/assets/css/adminlte.min.css">
     <link rel="stylesheet" href="<?= BASED ?>/assets/css/main.css">
@@ -141,18 +141,32 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                         Ver todos os estoques registradas.
                                     </div>
                                     <div class="tab-pane fade" id="cadastrar" role="tabpanel" aria-labelledby="cadastrar-tab">
-                                        <form method="post" action="./include/gCategoria.php">
-                                            <div class="input-group input-group-sm mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fa fa-list-ul" aria-hidden="true"></i></span>
+                                        <form method="post" action="./include/gEstoque.php">
+                                            <div class="form-group">
+                                                <label for='nome'> <small><b>Nome:</b></small></label>
+                                                <div class="input-group input-group-sm mb-3">
+
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-list-ul" aria-hidden="true"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome da categoria">
                                                 </div>
-                                                <input type="text" class="form-control" name="nome" placeholder="Nome da categoria">
                                             </div>
                                             <div class="form-group">
                                                 <label for='descricao'> <small><b>Descricao:</b></small></label>
                                                 <textarea class="form-control" name="descricao" id="descricao" rows="3" placeholder="Descrição do produto..." style="height: 89px;resize: none;"></textarea>
                                             </div>
-                                            <div class='form-group'>
+                                            <div class="form-group">
+                                                <label for='quantidade'> <small><b>Quantidade:</b></small></label>
+                                                <div class="input-group input-group-sm mb-3">
+
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-list-ul" aria-hidden="true"></i></span>
+                                                    </div>
+                                                    <input type="number" min="1" value="1" class="form-control" id="quantidade" name="quantidade" placeholder="Quantidade de itens">
+                                                </div>
+                                            </div>
+                                            <!-- <div class='form-group'>
                                                 <label for='categoria'> <small><b>Categoria:</b></small></label>
                                                 <select class="form-control select2" id="categoria" style="width: 100%;" name="categoria">
                                                     <option value="">Selecione a categoria</option>
@@ -171,7 +185,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                                     }
                                                     ?>
                                                 </select>
-                                            </div>
+                                            </div> -->
                                             <div class="align-right">
                                                 <button type="submit" class="btn btn-block btn-success">Salvar</button>
                                             </div>
