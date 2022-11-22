@@ -27,7 +27,7 @@
                         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">
-                                <i class="fas fa-search fa-fw"></i>
+                                <i class="fa fa-search fa-fw"></i>
                             </button>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         <i class="fa fa-list-alt" aria-hidden="true"></i>
                         <p>
                             Cadastro
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fa fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -73,6 +73,45 @@
                                 <p>Categorias</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?= BASED ?>/cadastro/estoque/" class="nav-link">
+                                <i class="fa fa-archive" aria-hidden="true"></i>
+                                <p>Estoque</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                        <p>
+                            Movimentação
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= BASED ?>/movimentacao/movimentar/" class="nav-link">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                <p>Entrada / Saída</p>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-archive" aria-hidden="true"></i>
+                        <p>
+                            Estoque
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="<?= BASED ?>/cadastro/estoque/" class="nav-link">
                                 <i class="fa fa-archive" aria-hidden="true"></i>
