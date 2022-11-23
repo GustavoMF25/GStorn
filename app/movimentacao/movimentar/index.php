@@ -56,9 +56,14 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                 "searching": false,
                 "info": false,
                 "buttons": [{
-                    text: "<i class='fa fa-plus-square' aria-hidden='true'></i> Nova Movimentação",
+                    text: "<span><i class='fa fa-cart-plus' aria-hidden='true'></i> Venda</span>",
                     action: function(e, dt, node, config) {
-                        $("#cadastro").modal('show');
+                        $("#cadastroVenda").modal('show');
+                    }
+                }, {
+                    text: "<i class='fa fa-plus-square' aria-hidden='true'></i> Movimentação",
+                    action: function(e, dt, node, config) {
+                        $("#cadastroMovimentacao").modal('show');
                     }
                 }],
                 "language": {
@@ -75,25 +80,25 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
 
         function mudaProduto(estoque) {
             console.log(estoque)
-            // let url = './include/cProduto.php'
-            // $.ajax({
-            //         url: url,
-            //         type: 'post',
-
-            //         data: {
-            //             estoque
-            //         },
-            //         beforeSend: function() {
-            //             $("#resultado").html("ENVIANDO...");
-            //         }
-            //     })
-            //     .done(function(msg) {
-            //         console.log(msg)
-            //     })
-            //     .fail(function(jqXHR, textStatus, msg) {
-            //         // alert(msg);
-            //         console.log(`Error -> ${msg}`)
-            //     });
+            let url = './include/cProduto.php'
+            $.ajax({
+                    url: url,
+                    type: 'post',
+                    dataType: 'html',
+                    data: {
+                        estoque
+                    },
+                    beforeSend: function() {
+                        $("#resultado").html("ENVIANDO...");
+                    }
+                })
+                .done(function(msg) {
+                    console.log(msg)
+                })
+                .fail(function(jqXHR, textStatus, msg) {
+                    // alert(msg);
+                    console.log(`Error -> ${msg}`)
+                });
         }
 
         function mudaTabs(atual = null) {
@@ -167,6 +172,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">Estoque</th>
+                                        <th class="text-center">Produto</th>
                                         <th class="text-center">Tipo de Movimentacao</th>
                                         <th class="text-center">Custo</th>
                                         <th class="text-center">Venda</th>
@@ -180,6 +186,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                     $queryBusca = "select 
                                                                 mov.id,
                                                                 est.nome,
+                                                                concat(prod.codigo, concat(' - ', prod.nome)),
                                                                 mov.tipo,
                                                                 mov.precusto,
                                                                 mov.prevenda,
@@ -188,7 +195,9 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                                                 mov.criado_hora 
                                                             from movimentacao mov
                                                             left join estoque est on(mov.idestoque = est.id)
+                                                            left join produto prod on(prod.id = mov.idproduto)
                                                             where mov.idusuario = {$_SESSION['idusuario']}";
+
 
                                     $resp = mysqli_query($con, $queryBusca);
                                     while ($row = mysqli_fetch_array($resp)) {
@@ -203,6 +212,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                             <td class="text-center"><?= $row[5] ?></td>
                                             <td class="text-center"><?= $row[6] ?></td>
                                             <td class="text-center"><?= $row[7] ?></td>
+                                            <td class="text-center"><?= $row[8] ?></td>
                                         </tr>
                                     <?php
                                     }
