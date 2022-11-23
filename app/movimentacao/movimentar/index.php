@@ -41,7 +41,10 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            $('.select2').select2();
+            $('.select2').select2({
+                width: 'resolve',
+                theme: "classic"
+            });
 
             mudaTabs('<?= $tabs ?>')
             // BASICO DATATABLE
@@ -70,6 +73,28 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
         })
 
 
+        function mudaProduto(estoque) {
+            console.log(estoque)
+            // let url = './include/cProduto.php'
+            // $.ajax({
+            //         url: url,
+            //         type: 'post',
+
+            //         data: {
+            //             estoque
+            //         },
+            //         beforeSend: function() {
+            //             $("#resultado").html("ENVIANDO...");
+            //         }
+            //     })
+            //     .done(function(msg) {
+            //         console.log(msg)
+            //     })
+            //     .fail(function(jqXHR, textStatus, msg) {
+            //         // alert(msg);
+            //         console.log(`Error -> ${msg}`)
+            //     });
+        }
 
         function mudaTabs(atual = null) {
             if (atual == 'cadastrar-tab') {

@@ -36,9 +36,10 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
     <link rel="stylesheet" href="<?= BASE ?>/assets/css/adminlte.min.css">
     <link rel="stylesheet" href="<?= BASED ?>/assets/css/main.css">
 
-    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-bs4/css/dataTables.bootstrap4.min.css">
+
     <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-bs4/css/dataTables.bootstrap4.min.css">
 
     <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/icheck-bootstrap/icheck-bootstrap.min.css">
 
@@ -47,7 +48,10 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            $('.select2').select2({});
+            $('.select2').select2({
+                width: 'resolve',
+                theme: "classic"
+            });
 
             mudaTabs('<?= $tabs ?>')
             $(".money").maskMoney()
@@ -190,7 +194,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                            <label for='descricao'> <small><b>Descricao:</b></small></label>
+                                                <label for='descricao'> <small><b>Descricao:</b></small></label>
                                                 <textarea class="form-control" name="descricao" id="descricao" rows="3" placeholder="Descrição do produto..." style="height: 89px;resize: none;"></textarea>
                                             </div>
 

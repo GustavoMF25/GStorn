@@ -217,8 +217,8 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                                 <label for='senha'> Senha </label>
                                                 <div class="input-group input-group-sm has-validation">
                                                     <span class="input-group-text pointer" id="olho">
-                                                        <i class="fas fa-eye" id="mostra-senha"></i>
-                                                        <i class="fas fa-eye-slash" id="oculta-senha" style="display:none;"></i>
+                                                        <i class="fa fa-eye" id="mostra-senha"></i>
+                                                        <i class="fa fa-eye-slash" id="oculta-senha" style="display:none;"></i>
                                                     </span>
                                                     <input class='form-control senha' id="senha" onkeyup="verificaForcaSenha()" name="senha" type="password" required>
                                                     <div class="invalid-feedback">
@@ -233,7 +233,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                                 <label for='senha'> Confirme a senha </label>
                                                 <div class="input-group input-group-sm has-validation">
                                                     <span class="input-group-text pointer" id="olho">
-                                                        <i class="fas fa-lock"></i>
+                                                        <i class="fa fa-lock"></i>
                                                     </span>
                                                     <input class='form-control senha' id="confirma-senha" onkeyup="confirmaSenha()" name="confirma-senha" type="password" required>
                                                     <div class="invalid-feedback is-invalid">
