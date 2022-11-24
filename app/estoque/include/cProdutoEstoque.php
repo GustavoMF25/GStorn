@@ -18,9 +18,7 @@ $queryBusca = "
                 left join produto prod on(proes.idproduto = prod.id)
                 left join estoque est on(proes.idestoque = est.id)
                 where prod.idusuario = {$_SESSION['idusuario']} $estoque
-                group by prod.id;";
-
-
+                group by est.id, prod.id;";
 
 $resp = mysqli_query($con, $queryBusca);
 while ($row = mysqli_fetch_array($resp)) {

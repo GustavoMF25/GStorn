@@ -50,20 +50,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
 
             mudaTabs('<?= $tabs ?>')
             // BASICO DATATABLE
-            $("#table-usuario").DataTable({
-                "dom": 'rtip',
-                "responsive": false,
-                "searching": false,
-                "info": false,
-                "language": {
-                    "paginate": {
-                        "next": "Próximo",
-                        "previous": "Anterior",
-                        "first": "Primeiro",
-                        "last": "Último"
-                    },
-                }
-            })
+
 
             buscaProdutoEstoque()
         })
@@ -84,6 +71,8 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
 
         function buscaProdutoEstoque(estoque = null) {
             let url = './include/cProdutoEstoque.php';
+
+            let table = $("#table-estoque").DataTable();
             $.ajax({
                     url: url,
                     type: 'post',
@@ -97,7 +86,23 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                     }
                 })
                 .done(function(dados) {
+                    table.destroy();
+
                     $("#tableProdutoEstoque").html(dados)
+                    $("#table-estoque").DataTable({
+                        "dom": 'rtip',
+                        "responsive": false,
+                        "searching": false,
+                        "info": false,
+                        "language": {
+                            "paginate": {
+                                "next": "Próximo",
+                                "previous": "Anterior",
+                                "first": "Primeiro",
+                                "last": "Último"
+                            },
+                        }
+                    })
                 })
                 .fail(function(jqXHR, textStatus, msg) {
                     // alert(msg);
@@ -163,9 +168,9 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                                     <li class="nav-item">
                                         <a class="nav-link" id="cadastrar-tab" onclick="mudaTabs('cadastrar-tab')" data-toggle="pill" href="#cadastrar" role="tab" aria-controls="cadastrar" aria-selected="false">Entrada</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" id="saida-tab" onclick="mudaTabs('saida-tab')" data-toggle="pill" href="#saida" role="tab" aria-controls="saida" aria-selected="false">Saida</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                             <div class="card-body">
@@ -260,7 +265,7 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                             <div class="card-body">
                                 <div id="vergerenciar" style="display: none;">
                                     <div class="table-responsive">
-                                        <table id="table-usuario" class="table table-bordered table-sm table-hover dtr-inline collapsed">
+                                        <table id="table-estoque" class="table table-bordered table-sm table-hover dtr-inline collapsed">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">Produto</th>

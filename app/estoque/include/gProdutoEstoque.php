@@ -11,8 +11,10 @@ $hora = date('H:i:s');
 
 $response = [];
 
-for ($cont = 1; $cont <= $quantidade; $cont++) {
+$verificaQuantidade = "select count(*) from produtoestoque where idestoque = {$estoque}";
 
+
+for ($cont = 1; $cont <= $quantidade; $cont++) {
 
     $queryInsert = "insert into produtoestoque(idestoque, idproduto, status, criado_data, criado_hora) values ({$estoque}, {$produto}, 'a', '{$data}','{$hora}')";
     if (mysqli_query($con, $queryInsert)) {
