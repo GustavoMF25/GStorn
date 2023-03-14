@@ -55,17 +55,17 @@ $tabs = isset($_GET['tab']) ? $_GET['tab'] : 'gerenciar';
                 "responsive": true,
                 "searching": false,
                 "info": false,
-                "buttons": [{
-                    text: "<span><i class='fa fa-cart-plus' aria-hidden='true'></i> Venda</span>",
-                    action: function(e, dt, node, config) {
-                        $("#cadastroVenda").modal('show');
-                    }
-                }, {
-                    text: "<i class='fa fa-plus-square' aria-hidden='true'></i> Movimentação",
-                    action: function(e, dt, node, config) {
-                        $("#cadastroMovimentacao").modal('show');
-                    }
-                }],
+                // "buttons": [{
+                //     text: "<span><i class='fa fa-cart-plus' aria-hidden='true'></i> Venda</span>",
+                //     action: function(e, dt, node, config) {
+                //         $("#cadastroVenda").modal('show');
+                //     }
+                // }, {
+                //     text: "<i class='fa fa-plus-square' aria-hidden='true'></i> Movimentação",
+                //     action: function(e, dt, node, config) {
+                //         $("#cadastroMovimentacao").modal('show');
+                //     }
+                // }],
                 "language": {
                     "paginate": {
                         "next": "Próximo",

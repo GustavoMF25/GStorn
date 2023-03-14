@@ -88,7 +88,6 @@ include './config/config.php';
 
             <!-- Main content -->
             <section class="content mx-3">
-
                 <!-- Default box -->
                 <div class="row">
                     <div class="col-sm-12 col-md-4 col-lg-4">

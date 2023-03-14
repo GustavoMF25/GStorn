@@ -12,12 +12,12 @@
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?= $_SESSION['perfil']['foto'] ?>" alt="AdminLTE Logo" class="img-circle elevation-2" style="">
+                <img src="<?= isset($_SESSION['perfil']['foto'])? $_SESSION['perfil']['foto'] : BASED . "/assets/images/avatar.png"; ?>" alt="AdminLTE Logo" class="img-circle elevation-2" style="">
                 <!--<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
                 <!--<i class="fa fa-user-circle img-circle elevation-2" aria-hidden="true" style="color: #fafafa;"></i>-->
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?= isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Sem usuário' ?></a>
+                <a href="<?= BASED ?>/perfil/?id=<?=$_SESSION['idusuario']?>" class="d-block"><?= isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Sem usuário' ?></a>
             </div>
         </div>
 

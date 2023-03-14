@@ -52,6 +52,10 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 
+
+    <!-- Dropzone -->
+    <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/dropzone/min/dropzone.min.js">
+
     <link rel="stylesheet" href="<?= BASED ?>/assets/vendor/icheck-bootstrap/icheck-bootstrap.min.css">
 
 
@@ -82,6 +86,49 @@ if (isset($_GET['id'])) {
         }
     </style>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+                url: "/target-url", // Set the url
+                thumbnailWidth: 80,
+                thumbnailHeight: 80,
+                parallelUploads: 20,
+                autoQueue: false, // Make sure the files aren't queued until manually added
+                clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+            })
+
+            myDropzone.on("addedfile", function(file) {
+                // Hookup the start button
+                file.previewElement.querySelector(".start").onclick = function() {
+                    myDropzone.enqueueFile(file)
+                }
+            })
+
+            // Update the total progress bar
+            myDropzone.on("totaluploadprogress", function(progress) {
+                document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+            })
+
+            myDropzone.on("sending", function(file) {
+                // Show the total progress bar when upload starts
+                document.querySelector("#total-progress").style.opacity = "1"
+                // And disable the start button
+                file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+            })
+            myDropzone.on("queuecomplete", function(progress) {
+                document.querySelector("#total-progress").style.opacity = "0"
+            })
+
+            document.querySelector("#actions .start").onclick = function() {
+                myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+            }
+
+            document.querySelector("#actions .cancel").onclick = function() {
+                myDropzone.removeAllFiles(true)
+            }
+        })
+    </script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -103,8 +150,8 @@ if (isset($_GET['id'])) {
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-left">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Blank Page</li>
+                                    <li class="breadcrumb-item"><a href="<?= BASED ?>">Inicio</a></li>
+                                    <li class="breadcrumb-item active">Perfil</li>
                                 </ol>
                             </div>
                             <div class="col-sm-6">
@@ -134,10 +181,10 @@ if (isset($_GET['id'])) {
                                     <div class="col-lg-12">
                                         <small><b>Status: </b></small>
                                         <?php
-                                        if ($row[5] == 's') {
+                                        if ($row[5] == 'a') {
                                             echo '<span class="badge badge-success">Ativo</span>';
                                         }
-                                        if ($row[5] == 'n') {
+                                        if ($row[5] == 'i') {
                                             echo '<span class="badge badge-warning">Bloqueado</span>';
                                         }
                                         ?>
@@ -148,6 +195,7 @@ if (isset($_GET['id'])) {
                                         <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#historico"><i class="fa fa-refresh"></i> Histórico</a></li>
                                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#editar"><i class="fa fa-pencil"></i> Editar</a></li>
                                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#alterasenha"><i class="fa fa-lock"></i> Alterar Senha</a></li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#alterarfoto"><i class="fa fa-picture-o"></i> Alterar Foto</a></li>
 
                                     </ul>
                                     <div class="tab-content">
@@ -165,6 +213,11 @@ if (isset($_GET['id'])) {
                                         <div class="tab-pane" id="alterasenha">
                                             <?php
                                             include 'include/cAlteraSenha.php';
+                                            ?>
+                                        </div>
+                                        <div class="tab-pane" id="alterarfoto">
+                                            <?php
+                                            include 'include/cAlterarFoto.php';
                                             ?>
                                         </div>
 
@@ -186,6 +239,8 @@ if (isset($_GET['id'])) {
     <script src="<?= BASE ?>/assets/vendor/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="<?= BASE ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Dropzone -->
+    <script src="<?= BASED ?>/assets/vendor/dropzone/min/dropzone.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?= BASE ?>/assets/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
