@@ -17,6 +17,44 @@ include './config/config.php';
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= BASE ?>/assets/css/adminlte.min.css">
     <link rel="stylesheet" href="<?= BASED ?>/assets/css/main.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const barVendas = document.getElementById('chart-vendas');
+
+            new Chart(barVendas, {
+                type: 'bar',
+
+                data: {
+                    labels: ['aaa', 'nnnn', 'bbbbbbbb', 'aaaaa', '222222'],
+                    datasets: [{
+                        data: [1, 2, 3, 4, 5],
+                        borderWidth: 1
+                    }]
+                }
+            })
+
+            // var barChartCanvas = $('#barChart').get(0).getContext('2d')
+            // var barChartData = $.extend(true, {}, areaChartData)
+            // var temp0 = areaChartData.datasets[0]
+            // var temp1 = areaChartData.datasets[1]
+            // barChartData.datasets[0] = temp1
+            // barChartData.datasets[1] = temp0
+
+            // var barChartOptions = {
+            //     responsive: true,
+            //     maintainAspectRatio: false,
+            //     datasetFill: false
+            // }
+
+            // new Chart(barChartCanvas, {
+            //     type: 'bar',
+            //     data: barChartData,
+            //     options: barChartOptions
+            // })
+
+        })
+    </script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -49,56 +87,30 @@ include './config/config.php';
             </section>
 
             <!-- Main content -->
-            <section class="content">
+            <section class="content mx-3">
 
                 <!-- Default box -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Title</h3>
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                        <div class="card card-success card-outline card-tabs">
+                            <div class="card-header">
+                                <h3 class="card-title">Venda</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-vendas">
 
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                                <i class="fas fa-times"></i>
-                            </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <?php
-                        print_r($_SESSION);
-                        ?>
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        Footer
-                    </div>
-                    <!-- /.card-footer-->
                 </div>
-                <!-- /.card -->
-
             </section>
-            <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-
-
         <?php
         include "./include/footer.php";
         ?>
-        <!-- <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.2.0
-                </div>
-                <strong>Copyright &copy; 2022 <a href="https://syntaxweb.com.br">Syntax Web</a>.</strong> All rights reserved.
-            </footer> -->
+    </div>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
@@ -106,6 +118,9 @@ include './config/config.php';
     <script src="<?= BASE ?>/assets/vendor/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="<?= BASE ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="<?= BASE ?>/assets/vendor/chart.js/Chart.min.js"></script>
+
     <!-- AdminLTE App -->
     <script src="<?= BASE ?>/assets/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
